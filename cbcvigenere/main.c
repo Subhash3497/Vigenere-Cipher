@@ -17,8 +17,11 @@ int main(int argc, const char *argv[])
     char vector[11];
     char cleantxt[5000];
     char inputchar;
+    char workarray;
+    
     FILE *ifp;
     int i = 0;
+    int j = 0;
     
     strcpy(inputfilename, argv[1]);
     strcpy(keyword, argv[2]);
@@ -49,6 +52,17 @@ int main(int argc, const char *argv[])
     }
     
     fclose(ifp);
+
+    
+    for (i = 0; i < strlen(cleantxt); i++)
+    {
+        if ((i % strlen(vector)) == 0)
+        {
+            
+            
+            
+        }
+    }
     
     
     
@@ -58,5 +72,10 @@ int main(int argc, const char *argv[])
     
     
     
+    
+    
+    
+    
+  
     return 0;
 }
