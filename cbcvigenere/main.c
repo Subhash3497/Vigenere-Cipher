@@ -26,6 +26,8 @@ int main(int argc, const char *argv[])
     FILE *ifp;
     int i = 0;
     int j = 0;
+    int padchar = 0;
+
     
     strcpy(inputfilename, argv[1]);
     strcpy(inputkeyword, argv[2]);
@@ -82,21 +84,9 @@ int main(int argc, const char *argv[])
     {
         transvector[i] = converttonum(inputvector[i]);
     }
-    
-   while ((strlen(cleantxt) % strlen(inputvector)) != 0)
-   {
-       strcat(cleantxt, "x");
-       int padchar = 0;
-       padchar++;
-   }
-    
-    
-    
-    
-    
     i = 0;
     
-
+    
     while (inputchar != EOF)
     {
         inputchar = getc(ifp);
@@ -114,7 +104,15 @@ int main(int argc, const char *argv[])
     }
     fclose(ifp);
     
-    for (i = 0; i < strlen(cleantxt); i++)
+    //Padding with x
+    while ((strlen(cleantxt) % strlen(inputvector)) != 0)
+    {
+        padchar++;
+        strcat(cleantxt, "x" );
+    }
+
+ 
+    for (i = 0; i <= strlen(cleantxt); i++)
     {
         //Block 1 Encryption
         if (i % strlen(inputvector) == 0 && i <= strlen(inputvector))
@@ -142,6 +140,11 @@ int main(int argc, const char *argv[])
             {
                 ciphertext[p] = cipherblock[j];
             }
+            
+            for (k = 0; k < strlen(inputvector); k++)
+            {
+                cipherblock[k] = cipherblock[k] - 97;
+            }
         }
         else if (i % strlen(inputvector) == 0 && i >= strlen(inputvector))
         {
@@ -168,10 +171,44 @@ int main(int argc, const char *argv[])
             {
                 ciphertext[p] = cipherblock[j];
             }
+            
+            for (k = 0; k < strlen(inputvector); k++)
+            {
+                cipherblock[k] = cipherblock[k] - 97;
+            }
+            
         }
         
-       
+        
+        
+        
+        
+        
     }
+    
+    
+    //Printing the output.
+    
+    puts("CBC Vigenere by Subhash Naidu");
+    printf("Plaintext file name: %s\n",inputfilename);
+    printf("Vigenere keyword: %s\n", inputkeyword);
+    printf("Initialization vector: %s\n\n",inputvector);
+    
+    printf("Clean Plaintext:\n\n");
+    for (i = 0; i <= strlen(cleantxt); i++)
+    {
+        printf("%c",cleantxt[i]);
+    }
+    
+    printf("\n\nCiphertext:\n\n");
+    for (i = 0; i <= strlen(cleantxt); i++)
+    {
+        printf("%c",ciphertext[i]);
+    }
+    
+    printf("\n\nNumber of characters in clean plaintext file: %lu\n",strlen(cleantxt) - padchar);
+    printf("Block size = %lu\n",strlen(inputvector));
+    printf("Number of pad characters added: %d\n\n",padchar);
     
     
     
