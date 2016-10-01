@@ -59,11 +59,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "pizza"
+            argument = "secret"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "gevrs"
+            argument = "pdqist"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
