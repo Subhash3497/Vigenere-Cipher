@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+//Auxiliary function i created to convert letters into numbers.
 int converttonum(char c);
 
 int main(int argc, const char *argv[])
@@ -28,11 +28,12 @@ int main(int argc, const char *argv[])
     int j = 0;
     int padchar = 0;
 
-    
+    //Copying commmand line arguments into local variables.
     strcpy(inputfilename, argv[1]);
     strcpy(inputkeyword, argv[2]);
     strcpy(inputvector, argv[3]);
     
+    //opening file and error checking.
     ifp = fopen(inputfilename, "r");
     if (ifp == 0)
     {
@@ -86,7 +87,7 @@ int main(int argc, const char *argv[])
     }
     i = 0;
     
-    
+    //Cleaning up input file by removing extraneous spaces capital letters and symbols.
     while (inputchar != EOF)
     {
         inputchar = getc(ifp);
@@ -111,7 +112,7 @@ int main(int argc, const char *argv[])
         strcat(cleantxt, "x" );
     }
 
- 
+    //Encryption Loop -- takes string of size block length and encrypts the text and puts it into the ciphertext array.
     for (i = 0; i <= strlen(cleantxt); i++)
     {
         //Block 1 Encryption
@@ -145,7 +146,7 @@ int main(int argc, const char *argv[])
             {
                 cipherblock[k] = cipherblock[k] - 97;
             }
-        }
+        }//Block 2+ encryption
         else if (i % strlen(inputvector) == 0 && i >= strlen(inputvector))
         {
             int k = i - strlen(inputvector);
@@ -176,19 +177,10 @@ int main(int argc, const char *argv[])
             {
                 cipherblock[k] = cipherblock[k] - 97;
             }
-            
         }
-        
-        
-        
-        
-        
-        
     }
     
-    
     //Printing the output.
-    
     puts("CBC Vigenere by Subhash Naidu");
     printf("Plaintext file name: %s\n",inputfilename);
     printf("Vigenere keyword: %s\n", inputkeyword);
@@ -209,10 +201,7 @@ int main(int argc, const char *argv[])
     printf("\n\nNumber of characters in clean plaintext file: %lu\n",strlen(cleantxt) - padchar);
     printf("Block size = %lu\n",strlen(inputvector));
     printf("Number of pad characters added: %d\n\n",padchar);
-    
-    
-    
-    
+      
     return 0;
 }
 
